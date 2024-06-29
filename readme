@@ -1,0 +1,57 @@
+//   http://localhost:8000/restaurant/list  gives all the list
+//   http://localhost:8000/restaurant/create  it create a new restaurant
+//   http://localhost:8000/restaurant/update/6 
+//   http://localhost:8000/restaurant/delete/6  delete doesn't mean it deleted from the database,it in update is_active column so that that do not appear in the get/lits
+//   http://localhost:8000/restaurant/get/6  get by id 
+
+//   {
+//     "restaurant_name": "ABC Restaurant",
+//     "restaurant_full_address": "123 Example St, Example City, EX 12345",
+//     "email": "ABC@restaurant.com",
+//     "mobile_number": "997-456-7890",
+//     "google_map_link": "https://maps.google.com/example",
+//     "owner_name": "John Doe",
+//     "owner_mobile_number": "996-765-4321"
+//   }
+
+
+// CREATE TABLE customer_orders (
+//     id INT AUTO_INCREMENT PRIMARY KEY,
+//     customer_name VARCHAR(255) NOT NULL,
+//     mobile_number VARCHAR(20) NOT NULL,
+//     aadhar_number VARCHAR(12) NOT NULL,
+//     time_to_take_food TIME NOT NULL,
+//     table_number INT NOT NULL,
+//     restaurant_id INT NOT NULL,
+//     foods JSON,  -- Column for storing foods in JSON format
+//     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+// );
+
+
+// http://localhost:8000/order/create to create order
+// http://localhost:8000/order/get/5  to get all order of given restaurant_id
+// http://localhost:8000/order/update/9  to update , for the given id
+// http://localhost:8000/order/delete/9  to delete ,given id
+
+
+// {
+//     "customer_name": "John Doe",
+//     "mobile_number": "1234567890",
+//     "aadhar_number": "1234-5678-9012",
+//     "food_time": "2024-06-27T12:30:00Z",
+//     "table_number": 5,
+//     "restaurant_id": 5,
+//     "foods": [
+//         {
+//             "food_id": 101,
+//             "food_name": "Pizza",
+//             "quantity": 2
+//         },
+//         {
+//             "food_id": 102,
+//             "food_name": "Pasta",
+//             "quantity": 1
+//         }
+//     ]
+// }
