@@ -160,9 +160,24 @@ const update_product = (id, productData, callback) => {
     }
   );
 };
+
+const product_by_id = (id, callback) => {
+  const sql = "SELECT * FROM products WHERE id = ? AND is_active = TRUE";
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      return callback(err);
+    }
+    if (results.length === 0) {
+      return callback(null, null);
+    }
+    return callback(null, results[0]);
+  });
+};
+
 module.exports = {
   create_product,
   product_list,
   product_delete,
   update_product,
+  product_by_id
 };
