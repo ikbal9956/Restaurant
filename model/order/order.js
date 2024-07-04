@@ -51,7 +51,12 @@ const create_order = (userData, callback) => {
   );
 };
 
-const orderlist_by_restaurant_id = (restaurant_id, pageNumber, pageLimit, callback) => {
+const orderlist_by_restaurant_id = (
+  restaurant_id,
+  pageNumber,
+  pageLimit,
+  callback
+) => {
   const limit = pageLimit;
   const offset = (pageNumber - 1) * limit;
 
@@ -74,7 +79,7 @@ const orderlist_by_restaurant_id = (restaurant_id, pageNumber, pageLimit, callba
       AND is_active = TRUE 
       LIMIT ? OFFSET ?
     `;
-    
+
     db.query(sql, [restaurant_id, limit, offset], (err, results) => {
       if (err) return callback(err);
 
@@ -82,7 +87,6 @@ const orderlist_by_restaurant_id = (restaurant_id, pageNumber, pageLimit, callba
     });
   });
 };
-
 
 const order_delete = (id, callback) => {
   const checkSql = `SELECT is_active FROM customer_orders WHERE id = ?`;
@@ -142,9 +146,20 @@ const update_order = (id, classData, callback) => {
   );
 };
 
+const customer_order = (id, restaurant_id, callback) => {
+  const sql = 'SELECT * FROM customer_orders WHERE id = ? AND restaurant_id = ?'; 
+
+    db.query(sql, [id, restaurant_id], (err, results) => {
+      if (err) return callback(err);
+
+      return callback(null, { order: results});
+    });
+};
+
 module.exports = {
   create_order,
   orderlist_by_restaurant_id,
   order_delete,
   update_order,
+  customer_order,
 };

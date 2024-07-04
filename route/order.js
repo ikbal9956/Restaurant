@@ -4,10 +4,11 @@ const create_order = require("../controller/order/create");
 const get = require("../controller/order/get");
 const update = require("../controller/order/update");
 const delete_by_id = require("../controller/order/delete");
-
+const customer_order=require("../controller/order/customer_order");
 
 router.post("/create", create_order);
 router.get("/get/:restaurant_id", get);
+router.get("/customer_order",customer_order)
 router.put("/update/:id", update);
 router.delete("/delete/:id", delete_by_id);
 
