@@ -51,25 +51,16 @@ const create_restaurant = (userData, callback) => {
   );
 };
 
-const restaurant_list = (pageNumber, pageLimit, callback) => {
-  const limit = pageLimit;
-  const offset = (pageNumber - 1) * limit;
 
-  const countSql =
-    "SELECT COUNT(*) AS totalCount FROM restaurants WHERE is_active = TRUE";
-  db.query(countSql, (err, countResult) => {
+const restaurant_list = (callback) => {
+  const sql = `SELECT * FROM restaurants WHERE is_active = TRUE`;
+  db.query(sql, (err, results) => {
     if (err) return callback(err);
 
-    const totalCount = countResult[0].totalCount;
-
-    const sql = `SELECT * FROM restaurants WHERE is_active = TRUE LIMIT ${limit} OFFSET ${offset}`;
-    db.query(sql, (err, results) => {
-      if (err) return callback(err);
-
-      return callback(null, { users: results, totalCount });
-    });
+    return callback(null, { restaurants: results });
   });
 };
+
 
 
 const restaurant_by_id = (id, callback) => {
@@ -84,8 +75,6 @@ const restaurant_by_id = (id, callback) => {
     return callback(null, results[0]);
   });
 };
-
-
 
 const restaurant_delete = (id, callback) => {
   const checkSql = `SELECT is_active FROM restaurants WHERE id = ?`;

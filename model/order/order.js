@@ -147,13 +147,23 @@ const update_order = (id, classData, callback) => {
 };
 
 const customer_order = (id, restaurant_id, callback) => {
-  const sql = 'SELECT * FROM customer_orders WHERE id = ? AND restaurant_id = ?'; 
+  const sql =
+    "SELECT * FROM customer_orders WHERE id = ? AND restaurant_id = ?";
 
-    db.query(sql, [id, restaurant_id], (err, results) => {
-      if (err) return callback(err);
+  db.query(sql, [id, restaurant_id], (err, results) => {
+    if (err) return callback(err);
 
-      return callback(null, { order: results});
-    });
+    return callback(null, { order: results });
+  });
+};
+
+const list = (callback) => {
+  const sql = `SELECT * FROM customer_orders WHERE is_active = TRUE`;
+  db.query(sql, (err, results) => {
+    if (err) return callback(err);
+
+    return callback(null, { order: results });
+  });
 };
 
 module.exports = {
@@ -162,4 +172,5 @@ module.exports = {
   order_delete,
   update_order,
   customer_order,
+  list,
 };
