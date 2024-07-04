@@ -51,40 +51,16 @@ const create_order = (userData, callback) => {
   );
 };
 
-const orderlist_by_restaurant_id = (
-  restaurant_id,
-  pageNumber,
-  pageLimit,
-  callback
-) => {
-  const limit = pageLimit;
-  const offset = (pageNumber - 1) * limit;
-
-  const countSql = `
-    SELECT COUNT(*) AS totalCount 
-    FROM customer_orders 
-    WHERE restaurant_id = ? 
-    AND is_active = TRUE
-  `;
-
-  db.query(countSql, [restaurant_id], (err, countResult) => {
-    if (err) return callback(err);
-
-    const totalCount = countResult[0].totalCount;
-
-    const sql = `
+const orderlist_by_restaurant_id = (restaurant_id,callback) => {
+  const sql = `
       SELECT * 
       FROM customer_orders 
       WHERE restaurant_id = ? 
-      AND is_active = TRUE 
-      LIMIT ? OFFSET ?
-    `;
+      AND is_active = TRUE `;
 
-    db.query(sql, [restaurant_id, limit, offset], (err, results) => {
-      if (err) return callback(err);
-
-      return callback(null, { orders: results, totalCount });
-    });
+  db.query(sql, [restaurant_id], (err, results) => {
+    if (err) return callback(err);
+    return callback(null, { orders: results });
   });
 };
 
