@@ -64,6 +64,19 @@ const orderlist_by_restaurant_id = (restaurant_id,callback) => {
   });
 };
 
+const get_by_id = (id,callback) => {
+  const sql = `
+      SELECT * 
+      FROM customer_orders 
+      WHERE id = ? 
+      AND is_active = TRUE `;
+
+  db.query(sql, [id], (err, results) => {
+    if (err) return callback(err);
+    return callback(null, { orders: results });
+  });
+};
+
 const order_delete = (id, callback) => {
   const checkSql = `SELECT is_active FROM customer_orders WHERE id = ?`;
   db.query(checkSql, [id], (err, results) => {
@@ -143,6 +156,7 @@ const list = (callback) => {
 };
 
 module.exports = {
+  get_by_id,
   create_order,
   orderlist_by_restaurant_id,
   order_delete,
