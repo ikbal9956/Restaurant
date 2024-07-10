@@ -9,7 +9,7 @@ const userRoutes = require("./indexRoutes.js");
 
 app.use("/", userRoutes);
 
-app.listen(8000, () => {
+app.listen(1000, () => {
   
-  console.log("Server is listening on port 8000");
+  console.log("Server is listening on port 1000");
 });
