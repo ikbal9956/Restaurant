@@ -10,13 +10,16 @@ const create_product = (req, res) => {
     price,
     rating,
     thumbnail,
-    images,
+    image1,
+    image2,
+    image3,
+    image4,
     discountPercentage,
     description,
     recipe,
     special
   } = req.body;
-  const imagesJSON = JSON.stringify(images);
+ 
   const productData = {
     id: uuidv4(),
     name,
@@ -25,7 +28,10 @@ const create_product = (req, res) => {
     price,
     rating,
     thumbnail,
-    images: imagesJSON,
+    image1,
+    image2,
+    image3,
+    image4,
     discountPercentage,
     description,
     recipe,

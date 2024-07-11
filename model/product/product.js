@@ -9,11 +9,15 @@ const create_product = (productData, callback) => {
     price,
     rating,
     thumbnail,
-    images,
+    image1,
+    image2,
+    image3,
+    image4,
     discountPercentage,
     description,
     recipe,
     special,
+    is_active,
     created_at,
     updated_at,
   } = productData;
@@ -27,14 +31,18 @@ const create_product = (productData, callback) => {
         price,
         rating,
         thumbnail,
-        images,
+        image1,
+        image2,
+        image3,
+        image4,
         discountPercentage,
         description,
         recipe,
         special,
+        is_active,
         created_at,
         updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
   db.query(
@@ -47,11 +55,15 @@ const create_product = (productData, callback) => {
       price,
       rating,
       thumbnail,
-      images,
+      image1,
+      image2,
+      image3,
+      image4,
       discountPercentage,
       description,
       recipe,
       special,
+      is_active,
       created_at,
       updated_at,
     ],
@@ -179,5 +191,5 @@ module.exports = {
   product_list,
   product_delete,
   update_product,
-  product_by_id
+  product_by_id,
 };
