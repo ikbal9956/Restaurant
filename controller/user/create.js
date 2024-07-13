@@ -3,7 +3,7 @@ const userModel = require("../../model/user/user.js");
 const bcrypt = require("bcrypt");
 
 const create_order = (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password ,is_admin =false } = req.body;
 
   bcrypt.hash(password, 10, (err, hashedPassword) => {
     if (err) {
@@ -15,6 +15,7 @@ const create_order = (req, res) => {
       name,
       email,
       password:hashedPassword,
+      is_admin,
       is_active: true,
       created_at: new Date(),
       updated_at: new Date(),

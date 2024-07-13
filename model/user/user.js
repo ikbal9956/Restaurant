@@ -2,7 +2,7 @@ const db = require("../../database/db.js");
 const bcrypt = require("bcrypt");
 
 const create_user = (userData, callback) => {
-  const { id, name, email, password, is_active, created_at, updated_at } =
+  const { id, name, email, password, is_admin, is_active, created_at, updated_at } =
     userData;
 
   const sql = `
@@ -11,16 +11,17 @@ const create_user = (userData, callback) => {
         name,
         email,
         password,
+        is_admin,
         is_active,
         created_at,
         updated_at
         
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?,?, ?, ?, ?)
     `;
 
   db.query(
     sql,
-    [id, name, email, password, is_active, created_at, updated_at],
+    [id, name, email, password,is_admin, is_active, created_at, updated_at],
     callback
   );
 };
