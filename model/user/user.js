@@ -29,18 +29,19 @@ const create_user = (userData, callback) => {
 
 const login_user = (email, password, callback) => {
     const sql =
-      "SELECT `id`, `password` FROM users WHERE `email` =? AND is_active = TRUE";
+      "SELECT `id`, `password`,`is_admin` FROM users WHERE `email` =? AND is_active = TRUE";
     db.query(sql, [email], (err, results) => {
       if (err) return callback(err);
       if (results.length === 0) return callback(new Error("user not found"));
   
       const storedpassword = results[0].password;
       const userID = results[0].id;
+      const isAdmin=results[0].is_admin;
       bcrypt.compare(password, storedpassword, (err, isMatch) => {
         if (err) return callback(err);
         if (!isMatch) return callback(new Error("invalid password"));
   
-        return callback(null, { id: userID });
+        return callback(null, { id: userID ,is_admin:isAdmin});
       });
     });
   };

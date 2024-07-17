@@ -21,13 +21,13 @@ const login = (req, res) => {
     }
 
     const tokenData = createToken(user.id,user.is_admin);
-    const token = tokenData.token;
-    const expires_in = tokenData.expiresIn;
+    // console.log( user.is_admin);
 
     return res.status(200).json({
       message: "login successful",
       token: tokenData.token,
       expires_in: tokenData.expiresIn,
+      is_admin:user.is_admin,
       data: {
         user,
       },
