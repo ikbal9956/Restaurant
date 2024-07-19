@@ -33,9 +33,9 @@ const create_order = (req, res) => {
         token: tokenData.token,
         expires_in: tokenData.expiresIn,
         is_admin: userData.is_admin,
-        data: {
-          user: userData,
-        },
+        // data: {
+        //   user: userData,
+        // },
       });
     });
   });
