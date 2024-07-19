@@ -11,5 +11,5 @@ app.use("/", userRoutes);
 
 app.listen(1000, () => {
   
-  console.log("Server is listening on port 1000");
+  console.log("Server is listening at port 1000");
 });
