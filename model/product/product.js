@@ -91,24 +91,24 @@ const product_list = (pageNumber, pageLimit, callback) => {
   });
 };
 
-const product_delete = (id, callback) => {
-  const checkSql = `SELECT is_active FROM products WHERE id = ?`;
-  db.query(checkSql, [id], (err, results) => {
-    if (err) return callback(err);
-    if (results.length === 0) return callback(new Error("product not found"));
+// const product_delete = (id, callback) => {
+//   const checkSql = `SELECT is_active FROM products WHERE id = ?`;
+//   db.query(checkSql, [id], (err, results) => {
+//     if (err) return callback(err);
+//     if (results.length === 0) return callback(new Error("product not found"));
 
-    const isActive = results[0].is_active;
-    if (!isActive) {
-      return callback(new Error("product is already deleted"));
-    }
+//     const isActive = results[0].is_active;
+//     if (!isActive) {
+//       return callback(new Error("product is already deleted"));
+//     }
 
-    const updateSql = `UPDATE products SET is_active = FALSE WHERE id = ?`;
-    db.query(updateSql, [id], (err, results) => {
-      if (err) return callback(err);
-      return callback(null, results);
-    });
-  });
-};
+//     const updateSql = `UPDATE products SET is_active = FALSE WHERE id = ?`;
+//     db.query(updateSql, [id], (err, results) => {
+//       if (err) return callback(err);
+//       return callback(null, results);
+//     });
+//   });
+// };
 
 const update_product = (id, productData, callback) => {
   const {
@@ -189,7 +189,7 @@ const product_by_id = (id, callback) => {
 module.exports = {
   create_product,
   product_list,
-  product_delete,
+  // product_delete,
   update_product,
   product_by_id,
 };
