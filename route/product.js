@@ -11,6 +11,6 @@ router.post("/create", create_product);
 router.get("/list", list);
 router.get("/get/:id",get);
 router.put("/update/:id", update);
-// router.delete("/delete/:id", delete_by_id);
+router.delete("/delete/:id", delete_by_id);
 
 module.exports = router;

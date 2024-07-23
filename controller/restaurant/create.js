@@ -28,7 +28,7 @@ const create_restaurant = (req, res) => {
 
   restaurantModel.create_restaurant(userData, (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.status(201).json({ message: "User created successfully", data });
+    return res.status(201).json({ message: "Restaurant created successfully", data });
   });
 };
 

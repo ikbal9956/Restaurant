@@ -9,11 +9,11 @@ const list = (req, res) => {
     if (err)
       return res.status(500).json({ message: "Internal server error", err });
 
-    const { users, totalCount } = result;
+    const { products, totalCount } = result;
     const totalPages = Math.ceil(totalCount / pageLimit);
 
     return res.status(200).json({
-      products: users,
+      products: products,
       page:pageNumber,
       page_limit: pageLimit,
       total_count: totalCount,

@@ -1,8 +1,47 @@
+// const userModel = require("../../model/user/user");
+// const db = require("../../database/db.js");
+// const uuid = require("uuid");
+// const jwt = require("jsonwebtoken");
+// const createToken = require("../../utlis/create_token.js");
+
+// const login = (req, res) => {
+//   const { email, password } = req.body;
+
+//   userModel.login_user(email, password, (err, user) => {
+//     if (err) {
+//       if (err.message === "invalid password") {
+//         return res.status(401).json({ message: "invalid password" });
+//       } else if (err.message === "user not found") {
+//         return res.status(404).json({ message: "user not found" });
+//       } else {
+//         return res
+//           .status(500)
+//           .json({ error: "error finding user", details: err });
+//       }
+//     }
+
+//     const tokenData = createToken(user.id,user.is_admin);
+//     // console.log( user.is_admin);
+
+//     return res.status(200).json({
+//       message: "login successful",
+//       token: tokenData.token,
+//       expires_in: tokenData.expiresIn,
+//       is_admin:user.is_admin,
+//       data: {
+//         user,
+//       },
+//     });
+//   });
+// };
+
+// module.exports = login;
+
+
 const userModel = require("../../model/user/user");
-const db = require("../../database/db.js");
-const uuid = require("uuid");
-const jwt = require("jsonwebtoken");
 const createToken = require("../../utlis/create_token.js");
+
+
 
 const login = (req, res) => {
   const { email, password } = req.body;
@@ -20,14 +59,13 @@ const login = (req, res) => {
       }
     }
 
-    const tokenData = createToken(user.id,user.is_admin);
-    // console.log( user.is_admin);
+    const tokenData = createToken(user.id, user.is_admin);
 
     return res.status(200).json({
       message: "login successful",
       token: tokenData.token,
       expires_in: tokenData.expiresIn,
-      is_admin:user.is_admin,
+      is_admin: user.is_admin,
       data: {
         user,
       },

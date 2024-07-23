@@ -1,19 +1,44 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
-const db = mysql.createConnection({
-  host: "database-4.cz84u0u4ey3h.eu-north-1.rds.amazonaws.com",
-  port:"3306",
-  user: "admin",
-  password: "Abhishek123",
+// const db = mysql.createConnection({
+  
+//   host:"online123-5483.7s5.aws-ap-south-1.cockroachlabs.cloud",
+//   port:"26257",
+//   database: "defaultdb",
+//   user:"ikbal",
+//   password:"Online123"
+// });
+
+// db.connect((err) => {
+//   if (err) {
+//     console.error("Database connection failed: " + err.stack);
+//     return;
+//   }
+//   console.log("Connected to database.");
+// });
+
+// module.exports = db;
+
+
+const { Client } = require('pg');
+
+const client = new Client({
+  host: "online123-5483.7s5.aws-ap-south-1.cockroachlabs.cloud",
+  port: 26257,
   database: "project",
+  user: "ikbal",
+  password: "Oodt-i1TB7RI9ea8fZgXBA",
+  ssl: {
+    rejectUnauthorized: true
+  }
 });
 
-db.connect((err) => {
+client.connect((err) => {
   if (err) {
     console.error("Database connection failed: " + err.stack);
     return;
   }
-  console.log("Connected to database.");
+  console.log("Connected to CockroachDB.");
 });
 
-module.exports = db;
+module.exports = client;
