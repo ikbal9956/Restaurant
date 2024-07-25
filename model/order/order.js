@@ -126,7 +126,7 @@ const create_order = (userData, callback) => {
 const orderlist_by_restaurant_id = (restaurant_id, callback) => {
   const sql = `
     SELECT * 
-    FROM customer_orders 
+    FROM customer_order 
     WHERE restaurant_id = $1 
     AND is_active = TRUE;
   `;
@@ -154,7 +154,7 @@ const orderlist_by_restaurant_id = (restaurant_id, callback) => {
 const get_by_id = (id, callback) => {
   const sql = `
     SELECT * 
-    FROM customer_orders 
+    FROM customer_order 
     WHERE id = $1 
     AND is_active = TRUE;
   `;
@@ -187,7 +187,7 @@ const get_by_id = (id, callback) => {
 
 const order_delete = (id, callback) => {
   // Check if the order exists and is active
-  const checkSql = 'SELECT is_active FROM customer_orders WHERE id = $1';
+  const checkSql = 'SELECT is_active FROM customer_order WHERE id = $1';
 
   pool.query(checkSql, [id], (err, results) => {
     if (err) return callback(err);
@@ -199,7 +199,7 @@ const order_delete = (id, callback) => {
     }
 
     // Update the order to set is_active to FALSE
-    const updateSql = 'UPDATE customer_orders SET is_active = FALSE WHERE id = $1';
+    const updateSql = 'UPDATE customer_order SET is_active = FALSE WHERE id = $1';
 
     pool.query(updateSql, [id], (err, results) => {
       if (err) return callback(err);
@@ -264,7 +264,7 @@ const update_order = (id, classData, callback) => {
   } = classData;
 
   const sql = `
-    UPDATE customer_orders 
+    UPDATE customer_order
     SET customer_name = $1, 
         mobile_number = $2, 
         aadhar_number = $3, 
@@ -303,7 +303,7 @@ const update_order = (id, classData, callback) => {
 
 const customer_order = (id, restaurant_id, callback) => {
   const sql =
-    "SELECT * FROM customer_orders WHERE id = ? AND restaurant_id = ?";
+    "SELECT * FROM customer_order WHERE id = ? AND restaurant_id = ?";
 
   db.query(sql, [id, restaurant_id], (err, results) => {
     if (err) return callback(err);
@@ -313,7 +313,7 @@ const customer_order = (id, restaurant_id, callback) => {
 };
 
 const list = (callback) => {
-  const sql = `SELECT * FROM customer_orders WHERE is_active = TRUE`;
+  const sql = `SELECT * FROM customer_order WHERE is_active = TRUE`;
 
   db.query(sql, (err, results) => {
     if (err) return callback(err);
