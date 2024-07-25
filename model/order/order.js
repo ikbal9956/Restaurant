@@ -50,6 +50,7 @@ const db = require("../../database/db.js");
 //     callback
 //   );
 // };
+
 const create_order = (userData, callback) => {
   const {
     id,
@@ -66,7 +67,7 @@ const create_order = (userData, callback) => {
   } = userData;
 
   const sql = `
-    INSERT INTO customer_orders (
+    INSERT INTO customer_order (
       id,
       customer_name,
       mobile_number,
