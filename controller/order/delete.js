@@ -2,7 +2,7 @@ const uuid = require("uuid");
 const orderModel = require("../../model/order/order.js");
 
 const delete_by_Id = (req, res) => {
-  const { id } = req.params;
+  const {id}  = req.params;
   orderModel.order_delete(id, (err, results) => {
     if (err) {
       if (err.message === "order is already deleted") {

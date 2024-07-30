@@ -189,7 +189,7 @@ const order_delete = (id, callback) => {
   // Check if the order exists and is active
   const checkSql = 'SELECT is_active FROM customer_order WHERE id = $1';
 
-  pool.query(checkSql, [id], (err, results) => {
+  db.query(checkSql, [id], (err, results) => {
     if (err) return callback(err);
     if (results.rows.length === 0) return callback(new Error("Order not found"));
 
@@ -201,7 +201,7 @@ const order_delete = (id, callback) => {
     // Update the order to set is_active to FALSE
     const updateSql = 'UPDATE customer_order SET is_active = FALSE WHERE id = $1';
 
-    pool.query(updateSql, [id], (err, results) => {
+    db.query(updateSql, [id], (err, results) => {
       if (err) return callback(err);
       return callback(null, results);
     });
@@ -277,7 +277,7 @@ const update_order = (id, classData, callback) => {
     WHERE id = $10
   `;
 
-  pool.query(
+  db.query(
     sql,
     [
       customer_name,
